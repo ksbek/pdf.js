@@ -2153,6 +2153,46 @@ const PDFViewerApplication = {
       onUpdateFindMatchesCount.bind(this),
       opts
     );
+    // Show outerContainer when PDF pages are loaded
+    eventBus._on(
+      "documentloaded",
+      () => {
+        const outerContainer = document.getElementById("outerContainer");
+        const loadingContainer = document.getElementById("loadingContainer");
+        if (outerContainer) {
+          outerContainer.classList.remove("visuallyHidden");
+        }
+        if (loadingContainer) {
+          loadingContainer.classList.add("hidden");
+        }
+      },
+      opts
+    );
+    eventBus._on(
+      "documenterror",
+      ({ message, reason }) => {
+        // Show error container and hide loading container
+        console.log(reason);
+        const outerContainer = document.getElementById("outerContainer");
+        const loadingContainer = document.getElementById("loadingContainer");
+        const errorContainer = document.getElementById("errorContainer");
+        const errorMessage = errorContainer?.querySelector(".error-message");
+
+        if (loadingContainer) {
+          loadingContainer.classList.add("hidden");
+        }
+        if (errorContainer) {
+          errorContainer.classList.remove("hidden");
+          if (errorMessage) {
+            errorMessage.textContent = message + " " + reason;
+          }
+        }
+        if (outerContainer) {
+          outerContainer.classList.add("visuallyHidden");
+        }
+      },
+      opts
+    );
     eventBus._on(
       "updatefindcontrolstate",
       onUpdateFindControlState.bind(this),

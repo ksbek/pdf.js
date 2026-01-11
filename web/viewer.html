@@ -98,7 +98,15 @@ See https://github.com/adobe-type-tools/cmap-resources
   </head>
 
   <body tabindex="0">
-    <div id="outerContainer">
+    <div id="loadingContainer" class="loading-container">
+      <div class="loading-spinner"></div>
+      <span data-l10n-id="pdfjs-loading-message">Loading PDF...</span>
+    </div>
+    <div id="errorContainer" class="error-container hidden">
+      <div class="error-icon"></div>
+      <div class="error-message"></div>
+    </div>
+    <div id="outerContainer" class="visuallyHidden">
       <span id="viewer-alert" class="visuallyHidden" role="alert"></span>
 
       <div id="mainContainer">

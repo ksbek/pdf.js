@@ -213,6 +213,96 @@ body {
   }
 }
 
+#loadingContainer {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--body-bg-color);
+  z-index: 100001;
+
+  .loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--progressBar-bg-color);
+    border-top-color: var(--progressBar-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+  }
+
+  span {
+    color: var(--main-color);
+    font-size: 14px;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#errorContainer {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--body-bg-color);
+  z-index: 100001;
+  padding: 20px;
+
+  .error-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    position: relative;
+    border-radius: 50%;
+    background-color: rgb(255 102 102);
+    flex-shrink: 0;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      height: 32px;
+      background-color: rgb(255 255 255);
+      border-radius: 1px;
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+
+  .error-message {
+    color: var(--main-color);
+    font-size: 16px;
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.5;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
 /* The following class is used to hide an element but keep it available to
  * for screen readers. */
 .visuallyHidden {
